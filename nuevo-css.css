@@ -1,0 +1,124 @@
+h1{
+
+  font-family: "Helvetica Neue", sans-serif;
+    /* Utiliza una fuente que te guste */
+    font-size: 45px !important;
+    /* Ajusta el tamaño de fuente según tus preferencias */
+    font-weight: bold;
+    /* Puedes hacerlo en negrita si lo deseas */
+    color: #333;
+    /* Elige un color que se ajuste a tu diseño */
+    text-align: center;
+    /* Centra el texto horizontalmente */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    /* Agrega una sombra de texto */
+    margin-bottom: 20px;
+    /* Agrega un margen inferior para separar el título del botón */
+}
+
+
+
+
+
+body {
+  display: flex;
+  flex-direction: column;
+  /* Establecemos una dirección de columna */
+  align-items: center;
+  /* Centramos horizontalmente */
+  justify-content: center;
+  /* Centramos verticalmente */
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a1a, #333, #1a1a1a);
+}
+
+.container {
+  border: solid 1px rgba(225, 225, 225, 0.2);
+  display: flex;
+  flex-direction: column;
+  /* Establecemos una dirección de columna */
+  align-items: center;
+  /* Centramos horizontalmente */
+}
+
+table {
+  color: #fff;
+  font-size: 14px;
+  table-layout: fixed;
+  font-family: sans-serif;
+  justify-content: center;
+}
+
+thead {
+  background: transparent;
+  border-bottom: 1px solid #ccc;
+}
+
+th {
+  padding: 20px 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 15px;
+  border-bottom: 1px solid rgba(225, 225, 225, 0.2);
+}
+
+button {
+  background: white;
+  cursor: pointer;
+  border: none;
+  padding: 16px 32px;
+  color: black;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  /* Añadimos margen inferior para separar el botón de la tabla */
+}
+
+h1 {
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 20px;
+  /* Añadimos margen inferior para separar el título del botón */
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg,
+      red, blue, deeppink, blue, red,
+      blue, deeppink, blue);
+
+  background-size: 800%;
+  border-radius: 10px;
+  filter: blur(8px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+}
+
+button:hover::before {
+  animation: glowing 20s linear infinite;
+  opacity: 1;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 400% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
