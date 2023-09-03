@@ -1,9 +1,9 @@
 const boton = document.getElementById("subir-button");
 const tabla = document.getElementById("tablaPersonas"); // Obtenemos la referencia a la tabla
+const fileInput = document.getElementById("file-input");
 
 boton.onclick = function () {
- 
-
+  fileInput.click();
   
   tabla.style.display = "table"; 
 };
