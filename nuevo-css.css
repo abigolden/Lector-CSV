@@ -19,7 +19,6 @@ h1{
 input[type="file"] {
   padding: 10px;
   border: none;
-  background-color: #f2f2f2;
   color: #333;
   border-radius: 5px;
   cursor: pointer;
@@ -70,7 +69,7 @@ td {
   border-bottom: 1px solid rgba(225, 225, 225, 0.2);
 }
 
-button {
+.estilo{
   background: white;
   cursor: pointer;
   border: none;
@@ -90,7 +89,7 @@ h1 {
   /* Añadimos margen inferior para separar el título del botón */
 }
 
-button::before {
+.estilo::before {
   content: "";
   position: absolute;
   top: 0;
@@ -109,7 +108,7 @@ button::before {
   opacity: 0;
 }
 
-button:hover::before {
+.estilo:hover::before {
   animation: glowing 20s linear infinite;
   opacity: 1;
 }
