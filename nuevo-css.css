@@ -16,9 +16,14 @@ h1{
     /* Agrega un margen inferior para separar el título del botón */
 }
 
-
-
-
+input[type="file"] {
+  padding: 10px;
+  border: none;
+  background-color: #f2f2f2;
+  color: #333;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
 body {
   display: flex;

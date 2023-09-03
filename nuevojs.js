@@ -3,41 +3,23 @@ const tabla = document.getElementById("tablaPersonas"); // Obtenemos la referenc
 const fileInput = document.getElementById("file-input");
 
 boton.onclick = function () {
-    readCSV();
+  readCSV();
 };
 
-const personas = [
-  {
-    name: "Mikhael",
-    email: "email.example@email.com",
-    phone: 8295650292,
-  },
-  {
-    name: "Abigail",
-    email: "email.example@email.com",
-    phone: 8295650292,
-  },
-  {
-    name: "Abraham",
-    email: "email.example@email.com",
-    phone: 8295650292,
-  },
-];
+function mostrarTabla(personas) {
+  const tbody = tabla.getElementsByTagName("tbody")[0];
 
-
-const tbody = tabla.getElementsByTagName("tbody")[0];
-
-// Iterar a través del array de personas y añadir cada persona como una nueva fila en la tabla
-personas.forEach((persona) => {
-  const fila = tbody.insertRow();
-  const celdaName = fila.insertCell(0);
-  const celdaEmail = fila.insertCell(1);
-  const celdaPhone = fila.insertCell(2);
-  celdaName.textContent = persona.name;
-  celdaEmail.textContent = persona.email;
-  celdaPhone.textContent = persona.phone;
-});
-
+  // Iterar a través del array de personas y añadir cada persona como una nueva fila en la tabla
+  personas.forEach((persona) => {
+    const fila = tbody.insertRow();
+    const celdaName = fila.insertCell(0);
+    const celdaEmail = fila.insertCell(1);
+    const celdaPhone = fila.insertCell(2);
+    celdaName.textContent = persona.name;
+    celdaEmail.textContent = persona.email;
+    celdaPhone.textContent = persona.phone;
+  });
+}
 function readCSV() {
   // Get the file input
   const csvFile = fileInput.files[0];
@@ -73,25 +55,21 @@ function readCSV() {
     const personas = convertirCSVAPersonas(csvArray);
     console.log(personas);
 
-    // Output the array for demonstration
-    
-  };
+    mostrarTabla(personas)
 
-  
+    // Output the array for demonstration
+  };
 
   // Read the file as text
   reader.readAsText(csvFile);
 }
 
-
 //////
-
 
 function convertirCSVAPersonas(csv) {
   const personas = [];
 
   csv.forEach(function (fila) {
-
     const persona = {
       name: fila[0],
       phone: fila[1],
