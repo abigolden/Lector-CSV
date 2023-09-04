@@ -6,30 +6,13 @@ boton.onclick = function () {
   readCSV();
 };
 
-function mostrarTabla(personas) {
-  const tbody = tabla.getElementsByTagName("tbody")[0];
-
-  // Iterar a través del array de personas y añadir cada persona como una nueva fila en la tabla
-  personas.forEach((persona) => {
-    const fila = tbody.insertRow();
-    const celdaName = fila.insertCell(0);
-    const celdaPhone = fila.insertCell(1);
-    const celdaEmail = fila.insertCell(2);
-    celdaName.textContent = persona.name;
-    celdaPhone.textContent = persona.phone;
-    celdaEmail.textContent = persona.email;
-  });
-}
-
 function readCSV() {
   const csvFile = archivoInput.files[0];
-
 
   if (!csvFile) {
     alert("Please select a CSV file.");
     return;
   }
-
 
   const reader = new FileReader();
 
@@ -57,6 +40,21 @@ function readCSV() {
 }
 
 //////
+function mostrarTabla(personas) {
+  const tbody = tabla.getElementsByTagName("tbody")[0];
+
+  console.log(tbody)
+  // Iterar a través del array de personas y añadir cada persona como una nueva fila en la tabla
+  personas.forEach((persona) => {
+    const fila = tbody.insertRow();
+    const celdaName = fila.insertCell(0);
+    const celdaPhone = fila.insertCell(1);
+    const celdaEmail = fila.insertCell(2);
+    celdaName.textContent = persona.name;
+    celdaPhone.textContent = persona.phone;
+    celdaEmail.textContent = persona.email;
+  });
+}
 
 function convertirCSVAPersonas(csv) {
   const personas = [];
