@@ -1,6 +1,6 @@
 const boton = document.getElementById("subir-button");
 const tabla = document.getElementById("tablaPersonas"); // Obtenemos la referencia a la tabla
-const fileInput = document.getElementById("file-input");
+const archivoInput = document.getElementById("archivo-input");
 
 boton.onclick = function () {
   readCSV();
@@ -13,42 +13,34 @@ function mostrarTabla(personas) {
   personas.forEach((persona) => {
     const fila = tbody.insertRow();
     const celdaName = fila.insertCell(0);
-    const celdaEmail = fila.insertCell(1);
-    const celdaPhone = fila.insertCell(2);
+    const celdaPhone = fila.insertCell(1);
+    const celdaEmail = fila.insertCell(2);
     celdaName.textContent = persona.name;
-    celdaEmail.textContent = persona.email;
     celdaPhone.textContent = persona.phone;
+    celdaEmail.textContent = persona.email;
   });
 }
-function readCSV() {
-  // Get the file input
-  const csvFile = fileInput.files[0];
 
-  // Check if a file is selected
+function readCSV() {
+  const csvFile = archivoInput.files[0];
+
+
   if (!csvFile) {
     alert("Please select a CSV file.");
     return;
   }
 
-  // Initialize FileReader
+
   const reader = new FileReader();
 
   reader.onload = function (event) {
-    // Get the file content
+
     const fileContent = event.target.result;
-
-    // Split the content into lines
     const lines = fileContent.split("\n");
-
-    // Initialize an array to hold the CSV data
     const csvArray = [];
 
-    // Loop through each line
     for (let i = 0; i < lines.length; i++) {
-      // Split each line into columns (assuming comma as the delimiter)
       const cols = lines[i].split(",");
-
-      // Push the columns to the array
       csvArray.push(cols);
     }
 
@@ -57,10 +49,10 @@ function readCSV() {
 
     mostrarTabla(personas)
 
-    // Output the array for demonstration
+    enviarElementos(personas)
+
   };
 
-  // Read the file as text
   reader.readAsText(csvFile);
 }
 
@@ -81,3 +73,39 @@ function convertirCSVAPersonas(csv) {
 
   return personas;
 }
+
+// URL de la API
+ const url =
+   "https://8j5baasof2.execute-api.us-west-2.amazonaws.com/production/tests/trucode/items";
+  
+
+function enviarElementos(personas) {
+  personas.forEach(function (persona) {
+    const post = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(persona),
+    };
+
+
+    console.log(post)
+    fetch(url, post)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log({ data });
+      })
+      .catch((error) => {
+        console.log("Dentro del catch");
+        console.log(error);
+      });
+  })
+  
+}
+
+
+
+

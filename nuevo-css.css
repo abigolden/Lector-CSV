@@ -1,19 +1,12 @@
 h1{
 
-  font-family: "Helvetica Neue", sans-serif;
-    /* Utiliza una fuente que te guste */
+    font-family: "Helvetica Neue", sans-serif;
     font-size: 45px !important;
-    /* Ajusta el tamaño de fuente según tus preferencias */
     font-weight: bold;
-    /* Puedes hacerlo en negrita si lo deseas */
     color: #333;
-    /* Elige un color que se ajuste a tu diseño */
     text-align: center;
-    /* Centra el texto horizontalmente */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    /* Agrega una sombra de texto */
     margin-bottom: 20px;
-    /* Agrega un margen inferior para separar el título del botón */
 }
 
 input[type="file"] {
@@ -27,11 +20,8 @@ input[type="file"] {
 body {
   display: flex;
   flex-direction: column;
-  /* Establecemos una dirección de columna */
   align-items: center;
-  /* Centramos horizontalmente */
   justify-content: center;
-  /* Centramos verticalmente */
   min-height: 100vh;
   background: linear-gradient(135deg, #1a1a1a, #333, #1a1a1a);
 }
@@ -40,9 +30,7 @@ body {
   border: solid 1px rgba(225, 225, 225, 0.2);
   display: flex;
   flex-direction: column;
-  /* Establecemos una dirección de columna */
   align-items: center;
-  /* Centramos horizontalmente */
 }
 
 table {
@@ -79,14 +67,14 @@ td {
   font-weight: bold;
   border-radius: 12px;
   margin-bottom: 20px;
-  /* Añadimos margen inferior para separar el botón de la tabla */
+
 }
 
 h1 {
   color: #fff;
   font-size: 24px;
   margin-bottom: 20px;
-  /* Añadimos margen inferior para separar el título del botón */
+  
 }
 
 .estilo::before {
