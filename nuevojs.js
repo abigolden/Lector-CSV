@@ -28,12 +28,10 @@ function readCSV() {
     }
 
     const personas = convertirCSVAPersonas(csvArray);
-    console.log(personas);
 
     mostrarTabla(personas)
 
     enviarElementos(personas)
-
   };
 
   reader.readAsText(csvFile);
@@ -78,9 +76,9 @@ function convertirCSVAPersonas(csv) {
   
 
 function enviarElementos(personas) {
-  personas.forEach(function (persona) {
-    const post = {
-      method: "GET",
+    personas.forEach(function (persona) {
+      const post = {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -94,13 +92,18 @@ function enviarElementos(personas) {
         return response.json();
       })
       .then((data) => {
-        console.log({ data });
+        console.log("no se esta actualizando")
+        if (data.error) {
+          alert("hay un error en tu csv " + data.error)
+          console.log("hay un error: ")
+        }
+
       })
       .catch((error) => {
         console.log("Dentro del catch");
         console.log(error);
       });
-  })
+  })  
   
 }
 
