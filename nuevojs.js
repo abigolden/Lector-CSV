@@ -1,13 +1,14 @@
-const boton = document.getElementById("subir-button");
-const tabla = document.getElementById("tablaPersonas"); // Obtenemos la referencia a la tabla
-const archivoInput = document.getElementById("archivo-input");
+const button = document.getElementById("upload-button");
+const table = document.getElementById("people-table"); // Obtenemos la referencia a la tabla
+const inputFile = document.getElementById("input-file");
+ const apiUrl ="https://8j5baasof2.execute-api.us-west-2.amazonaws.com/production/tests/trucode/items";
 
-boton.onclick = function () {
+button.onclick = function () {
   readCSV();
 };
 
 function readCSV() {
-  const csvFile = archivoInput.files[0];
+  const csvFile = inputFile.files[0];
 
   if (!csvFile) {
     alert("Please select a CSV file.");
@@ -16,97 +17,79 @@ function readCSV() {
 
   const reader = new FileReader();
 
+  // csv reader, convert csv to people, show the new array in the table and send people to the API endpoint
   reader.onload = function (event) {
-
     const fileContent = event.target.result;
     const lines = fileContent.split("\n");
     const csvArray = [];
 
-    for (let i = 0; i < lines.length; i++) {
-      const cols = lines[i].split(",");
+    lines.forEach(line => {
+      const cols = line.split(",")
       csvArray.push(cols);
-    }
+    });
 
-    const personas = convertirCSVAPersonas(csvArray);
+    const people = convertCSVToPeople(csvArray);
 
-    mostrarTabla(personas)
+    showPeopleTable(people);
 
-    enviarElementos(personas)
+    sendPeople(people)
   };
 
   reader.readAsText(csvFile);
 }
 
-//////
-function mostrarTabla(personas) {
-  const tbody = tabla.getElementsByTagName("tbody")[0];
+function showPeopleTable(people) {
+  const tbody = table.getElementsByTagName("tbody")[0];
+  
+  people.forEach((person) => {
+    const row = tbody.insertRow();
+    const cellName = row.insertCell(0);
+    const cellPhone = row.insertCell(1);
+    const cellEmail = row.insertCell(2);
 
-  console.log(tbody)
-  // Iterar a través del array de personas y añadir cada persona como una nueva fila en la tabla
-  personas.forEach((persona) => {
-    const fila = tbody.insertRow();
-    const celdaName = fila.insertCell(0);
-    const celdaPhone = fila.insertCell(1);
-    const celdaEmail = fila.insertCell(2);
-    celdaName.textContent = persona.name;
-    celdaPhone.textContent = persona.phone;
-    celdaEmail.textContent = persona.email;
+    cellName.textContent = person.name;
+    cellPhone.textContent = person.phone;
+    cellEmail.textContent = person.email;
   });
 }
 
-function convertirCSVAPersonas(csv) {
-  const personas = [];
+function convertCSVToPeople(csv) {
+  const people = [];
 
-  csv.forEach(function (fila) {
-    const persona = {
-      name: fila[0],
-      phone: fila[1],
-      email: fila[2],
+  csv.forEach(function (row) {
+    const person = {
+      name: row[0],
+      phone: row[1],
+      email: row[2],
     };
 
-    personas.push(persona);
+    people.push(person);
   });
 
-  return personas;
+  return people;
 }
-
-// URL de la API
- const url =
-   "https://8j5baasof2.execute-api.us-west-2.amazonaws.com/production/tests/trucode/items";
   
-
-function enviarElementos(personas) {
-    personas.forEach(function (persona) {
-      const post = {
+function sendPeople(people) {
+  people.forEach(function (person) {
+    const post = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(persona),
+      body: JSON.stringify(person),
     };
 
-
-    console.log(post)
-    fetch(url, post)
+    fetch(apiUrl, post)
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        console.log("no se esta actualizando")
         if (data.error) {
-          alert("hay un error en tu csv " + data.error)
-          console.log("hay un error: ")
+          alert("There is an error in your CSV: " + data.error);
         }
-
       })
       .catch((error) => {
-        console.log("Dentro del catch");
         console.log(error);
       });
   })  
-  
 }
-
-
-
-
