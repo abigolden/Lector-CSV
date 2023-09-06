@@ -7,11 +7,12 @@ button.onclick = function () {
   readCSV();
 };
 
+
 function readCSV() {
   const csvFile = inputFile.files[0];
 
   if (!csvFile) {
-    alert("Please select a CSV file.");
+    alert("Pleaseh select a CSV file.");
     return;
   }
 
@@ -29,8 +30,6 @@ function readCSV() {
     });
 
     const people = convertCSVToPeople(csvArray);
-
-    showPeopleTable(people);
 
     sendPeople(people)
   };
@@ -87,9 +86,37 @@ function sendPeople(people) {
         if (data.error) {
           alert("There is an error in your CSV: " + data.error);
         }
+        else {
+          showStoredPeople();
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   })  
+}
+
+function showStoredPeople() {
+  const get = {
+    method: "GET",
+    headers: {
+        "Content-Type": "application/json",
+      },
+  }
+
+  fetch(apiUrl, get)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      const dataPersonas = data.items
+      showPeopleTable(dataPersonas)
+      alert("We've send your csv successfully")
+
+
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  
 }
