@@ -1,12 +1,12 @@
 const button = document.getElementById("upload-button");
 const table = document.getElementById("people-table"); // Obtenemos la referencia a la tabla
 const inputFile = document.getElementById("input-file");
- const apiUrl ="https://8j5baasof2.execute-api.us-west-2.amazonaws.com/production/tests/trucode/items";
+const apiUrl =
+  "https://8j5baasof2.execute-api.us-west-2.amazonaws.com/production/tests/trucode/items";
 
 button.onclick = function () {
   readCSV();
 };
-
 
 function readCSV() {
   const csvFile = inputFile.files[0];
@@ -24,14 +24,14 @@ function readCSV() {
     const lines = fileContent.split("\n");
     const csvArray = [];
 
-    lines.forEach(line => {
-      const cols = line.split(",")
+    lines.forEach((line) => {
+      const cols = line.split(",");
       csvArray.push(cols);
     });
 
     const people = convertCSVToPeople(csvArray);
 
-    sendPeople(people)
+    sendPeople(people);
   };
 
   reader.readAsText(csvFile);
@@ -39,7 +39,7 @@ function readCSV() {
 
 function showPeopleTable(people) {
   const tbody = table.getElementsByTagName("tbody")[0];
-  
+
   people.forEach((person) => {
     const row = tbody.insertRow();
     const cellName = row.insertCell(0);
@@ -67,7 +67,7 @@ function convertCSVToPeople(csv) {
 
   return people;
 }
-  
+
 function sendPeople(people) {
   people.forEach(function (person) {
     const post = {
@@ -85,38 +85,34 @@ function sendPeople(people) {
       .then((data) => {
         if (data.error) {
           alert("There is an error in your CSV: " + data.error);
-        }
-        else {
+        } else {
           showStoredPeople();
         }
       })
       .catch((error) => {
         console.log(error);
       });
-  })  
+  });
 }
 
 function showStoredPeople() {
   const get = {
     method: "GET",
     headers: {
-        "Content-Type": "application/json",
-      },
-  }
+      "Content-Type": "application/json",
+    },
+  };
 
   fetch(apiUrl, get)
     .then((response) => {
       return response.json();
     })
     .then((data) => {
-      const dataPersonas = data.items
-      showPeopleTable(dataPersonas)
-      alert("We've send your csv successfully")
-
-
+      const dataPersonas = data.items;
+      showPeopleTable(dataPersonas);
+      alert("We've send your csv successfully");
     })
     .catch((error) => {
-      console.log(error)
-    })
-  
+      console.log(error);
+    });
 }

@@ -1,20 +1,32 @@
-h1{
+h1 {
 
-    font-family: "Helvetica Neue", sans-serif;
-    font-size: 45px !important;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    margin-bottom: 20px;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 45px !important;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
 }
 
-input[type="file"] {
-  padding: 10px;
-  border: none;
-  color: #333;
-  border-radius: 5px;
+
+input {
+  display: none;
+}
+
+label {
+  display: block;
+  background: black;
   cursor: pointer;
+  border: none;
+  padding: 18px 35px;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-family: sans-serif;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
 }
 
 body {
@@ -57,7 +69,7 @@ td {
   border-bottom: 1px solid rgba(225, 225, 225, 0.2);
 }
 
-.button-style{
+button {
   background: white;
   cursor: pointer;
   border: none;
@@ -67,6 +79,7 @@ td {
   font-weight: bold;
   border-radius: 12px;
   margin-bottom: 20px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
 
 }
 
@@ -74,7 +87,7 @@ h1 {
   color: #fff;
   font-size: 24px;
   margin-bottom: 20px;
-  
+
 }
 
 .button-style::before {
