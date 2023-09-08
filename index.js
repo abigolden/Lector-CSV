@@ -3,7 +3,7 @@ const table = document.getElementById("people-table"); // Obtenemos la referenci
 const inputFile = document.getElementById("input-file");
 const apiUrl ="https://8j5baasof2.execute-api.us-west-2.amazonaws.com/production/tests/trucode/items";
 const loadingMessage = document.getElementById("loading-message");
-const loadingMessageScreen =loadingMessage.textContent = "Enviando...";
+const loadingMessageScreen =loadingMessage.textContent = "Loading...";
 const stopedLoadingMessage = (loadingMessage.textContent = "");
 
 button.onclick = function () {
