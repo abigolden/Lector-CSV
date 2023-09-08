@@ -1,8 +1,7 @@
 const button = document.getElementById("upload-button");
 const table = document.getElementById("people-table"); // Obtenemos la referencia a la tabla
 const inputFile = document.getElementById("input-file");
-const apiUrl =
-  "https://8j5baasof2.execute-api.us-west-2.amazonaws.com/production/tests/trucode/items";
+const apiUrl ="https://8j5baasof2.execute-api.us-west-2.amazonaws.com/production/tests/trucode/items";
 
 button.onclick = function () {
   readCSV();
@@ -12,7 +11,7 @@ function readCSV() {
   const csvFile = inputFile.files[0];
 
   if (!csvFile) {
-    alert("Pleaseh select a CSV file.");
+    alert("Please select a CSV file.");
     return;
   }
 
@@ -68,31 +67,32 @@ function convertCSVToPeople(csv) {
   return people;
 }
 
-function sendPeople(people) {
-  people.forEach(function (person) {
-    const post = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(person),
-    };
+async function sendPeople(people) {
+  try {
+    for (let i = 0; i < people.length; i++) {
+        const person = people[i];
 
-    fetch(apiUrl, post)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
+        const post = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(person),
+        };
+
+        const response = await fetch(apiUrl, post);
+        const data = await response.json();
+
         if (data.error) {
-          alert("There is an error in your CSV: " + data.error);
-        } else {
-          showStoredPeople();
+          alert(`There is an error: ${data.error}`);
         }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  });
+      }
+
+      showStoredPeople()
+  } catch (error) {
+    console.log("en el catch")
+      alert("There was a failure in our service: " + error);
+  }
 }
 
 function showStoredPeople() {
@@ -113,6 +113,6 @@ function showStoredPeople() {
       alert("We've send your csv successfully");
     })
     .catch((error) => {
-      console.log(error);
+      alert("There was a failure in our service: " +  error);
     });
 }
