@@ -90,8 +90,7 @@ async function sendPeople(people) {
 
       showStoredPeople()
   } catch (error) {
-    console.log("en el catch")
-      alert("There was a failure in our service: " + error);
+    alert("There was a failure in our service: " + error);
   }
 }
 
