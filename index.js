@@ -3,8 +3,6 @@ const table = document.getElementById("people-table"); // Obtenemos la referenci
 const inputFile = document.getElementById("input-file");
 const apiUrl ="https://8j5baasof2.execute-api.us-west-2.amazonaws.com/production/tests/trucode/items";
 const loadingMessage = document.getElementById("loading-message");
-const loadingMessageScreen =loadingMessage.textContent = "Loading...";
-const stopedLoadingMessage = (loadingMessage.textContent = "");
 
 button.onclick = function () {
   readCSV();
@@ -17,7 +15,7 @@ function readCSV() {
     alert("Please select a CSV file.");
     return;
   }
-loadingMessage.textContent = "";
+
   const reader = new FileReader();
 
   // csv reader, convert csv to people, show the new array in the table and send people to the API endpoint
@@ -72,8 +70,7 @@ function convertCSVToPeople(csv) {
 
 async function sendPeople(people) {
   try {
-    loadingMessageScreen
-
+    loadingMessage.textContent = "Loading...";
     for (let i = 0; i < people.length; i++) {
         const person = people[i];
 
@@ -91,12 +88,15 @@ async function sendPeople(people) {
         if (data.error) {
           alert(`There is an error: ${data.error}`);
         }
-      }
-    stopedLoadingMessage
+    }
+    
+    loadingMessage.textContent = "";
 
     showStoredPeople()
 
   } catch (error) {
+    loadingMessage.textContent = "";
+
     alert("There was a failure in our service: " + error);
   }
 }
