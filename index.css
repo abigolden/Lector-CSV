@@ -9,6 +9,10 @@ h1 {
   margin-bottom: 20px;
 }
 
+#loading-message {
+  color: white;
+  font-family: sans-serif
+}
 
 input {
   display: none;
